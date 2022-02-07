@@ -4,10 +4,14 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
+
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -16,12 +20,14 @@ import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
  * directory.
  */
 public class Robot extends TimedRobot {
-  private final VictorSPX m_frontLeft = new VictorSPX(0);
-  private final VictorSPX m_frontRight = new VictorSPX(1);
-  private final TalonSRX m_backLeft = new TalonSRX(2);
-  private final TalonSRX m_backRight = new TalonSRX(3);
+  private final WPI_VictorSPX m_frontLeft = new WPI_VictorSPX(0);
+  private final WPI_VictorSPX m_frontRight = new WPI_VictorSPX(1);
+  private final WPI_TalonSRX m_backLeft = new WPI_TalonSRX(2);
+  private final WPI_TalonSRX m_backRight = new WPI_TalonSRX(3);
+  private final MotorControllerGroup m_leftDrive = new MotorControllerGroup(m_backLeft, m_frontLeft);
+  private final MotorControllerGroup m_rightDrive = new MotorControllerGroup(m_backRight, m_frontRight);
   private final DifferentialDrive m_robotDrive = new DifferentialDrive(m_leftDrive, m_rightDrive);
-  private final Joystick m_stick = new Joystick(0);
+  private final XboxController m_stick = new XboxController(0);
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -42,7 +48,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during teleoperated mode. */
   @Override
   public void teleopPeriodic() {
-    m_robotDrive.arcadeDrive(m_stick.getY(), m_stick.getX());
+    m_robotDrive.arcadeDrive(m_stick.getLeftY(), m_stick.getLeftX());
   }
 
   /** This function is called once each time the robot enters test mode. */
