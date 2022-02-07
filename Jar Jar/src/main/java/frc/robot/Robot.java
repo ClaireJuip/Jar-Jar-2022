@@ -20,10 +20,10 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
  * directory.
  */
 public class Robot extends TimedRobot {
-  private final WPI_VictorSPX m_frontLeft = new WPI_VictorSPX(0);
-  private final WPI_VictorSPX m_frontRight = new WPI_VictorSPX(1);
+  private final WPI_VictorSPX m_frontLeft = new WPI_VictorSPX(4);
+  private final WPI_VictorSPX m_frontRight = new WPI_VictorSPX(3);
   private final WPI_TalonSRX m_backLeft = new WPI_TalonSRX(2);
-  private final WPI_TalonSRX m_backRight = new WPI_TalonSRX(3);
+  private final WPI_TalonSRX m_backRight = new WPI_TalonSRX(1);
   private final MotorControllerGroup m_leftDrive = new MotorControllerGroup(m_backLeft, m_frontLeft);
   private final MotorControllerGroup m_rightDrive = new MotorControllerGroup(m_backRight, m_frontRight);
   private final DifferentialDrive m_robotDrive = new DifferentialDrive(m_leftDrive, m_rightDrive);
